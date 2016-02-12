@@ -1,0 +1,85 @@
+<style>
+.wg_mainBox{
+	height: 315px;
+	width: 300px;
+	border: 1px solid #d8d8d8;
+	overflow: auto;
+	font-family: Sans-serif;
+}
+
+.wg_titleBox{
+	text-align: center;
+	border-bottom: 1px solid #d8d8d8;
+}
+
+.wg_repoBox{
+	border-bottom: 1px solid #d8d8d8;
+}
+
+.wg_repoTitle{
+	padding:10px;
+	padding-bottom: 0px;
+}
+
+.wg_repoTitle a{
+	text-decoration: none;
+	color: #4078c0
+}
+
+.wg_repoDescription{
+	padding: 10px;
+}
+
+.wg_repoDescription span{
+	font-size: 12px;
+    line-height: 21px;
+    color: #767676;
+}
+
+.wg_repoStatics{
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.wg_repoStatics span{
+	font-size: 10px;
+}
+
+.wg_filters{
+}
+
+.wg_filters input{
+	width: 100%;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+</style>
+<div class="wg_mainBox">
+	<div class="wg_titleBox">
+		<h3>
+			Repositories of {{user}}
+		</h3>
+	</div>
+	<div class="wg_filters">
+		<input ng-model="filterByName" placeholder="Search repository">
+		<span>Order by:</span>
+		<select class="" ng-model="orderBySelected" ng-options="field as field.name for field in fields"></select>
+	</div>
+	<div class="wg_repoBox" ng-repeat="repo in repos | filter:filterByName | orderBy:orderBySelected.field:true">
+		<div class="wg_repoTitle">
+			<a target="_blank" ng-href="{{repo.svn_url}}">{{repo.name}}</a>
+		</div>
+		<div class="wg_repoDescription">
+			<span>
+				{{repo.description}}
+			</span>
+		</div>
+
+		<div class="wg_repoStatics">
+			<span>{{repo.watchers}} watchers</span>
+			<span>{{repo.forks}} forks</span>
+			<span>{{repo.stargazers_count}} stars</span>
+		</div>
+	</div>
+</div>
